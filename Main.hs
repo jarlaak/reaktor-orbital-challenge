@@ -16,5 +16,6 @@ call csvData
     satellites = reverse (map name (takeSatellites (map destination connections)))
 
 main = do
+  putStrLn "Solving problem..."
   csvFile <- parseCSVFromFile "generate.txt"
   putStrLn (show (call csvFile))
