@@ -5,7 +5,16 @@ import           Satellite
 import           Text.CSV
 import           Types
 
-data Solution = Solution { randomSeed::String, satellites::[String] } deriving Show
+data Solution = Solution { randomSeed::String, satellites::[String] }
+
+commaSeparated "" s2 = s2
+commaSeparated s1 "" = s1
+commaSeparated s1 s2 = s1 ++ "," ++ s2
+
+instance Show Solution where
+  show solution = "Random seed: " ++ (randomSeed solution) ++ "\n" ++ "Route: " ++ (foldl (commaSeparated) (head sats) (tail sats))
+    where
+      sats = Main.satellites solution
 
 call csvData
   = Solution (seed system) satellites
